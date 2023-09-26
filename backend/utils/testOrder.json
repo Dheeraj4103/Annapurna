@@ -1,0 +1,25 @@
+{
+    "shippingInfo": {
+        "address": "MBH Pune",
+        "city": "Pune",
+        "phoneNumber": "3168464838",
+        "postalCode": "410506",
+        "state": "Maharashtra",
+        "country": "India"
+    },
+    "orderItems": [
+        {
+            "name": "Paneer",
+            "quantity": 1,
+            "image": "https://res.cloudinary.com/dxn2tkapb/image/upload/v1692508205/products/vpsothzvj8gfesey0jnr.png",
+            "price": 100,
+            "product": "64e1a032f3fdeee8b79dcd39"
+        }
+    ],
+    "paymentInfo": {
+        "id": "testString"
+    },
+    "taxAmount": 40,
+    "shippingAmount": 10,
+    "totalAmount": 150
+}

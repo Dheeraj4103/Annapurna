@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Transfer Sender</title>
+</head>
+<body>
+    <input type="file" id="fileInput">
+    <button id="sendButton">Send File</button>
+
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+
+    <script>
+        const peer = new Peer(); // Create a new Peer instance
+
+        peer.on('open', (peerId) => {
+            console.log(`My Peer ID: ${peerId}`);
+        });
+
+        const sendButton = document.getElementById('sendButton');
+        sendButton.addEventListener('click', () => {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const fileReader = new FileReader();
+
+                fileReader.onload = (event) => {
+                    const fileData = event.target.result;
+
+                    const targetPeerId = prompt('Enter target Peer ID:');
+                    const connection = peer.connect(targetPeerId);
+
+                    connection.on('open', () => {
+                        connection.send({
+                            type: 'file',
+                            name: file.name,
+                            data: fileData
+                        });
+                    });
+                };
+
+                fileReader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
