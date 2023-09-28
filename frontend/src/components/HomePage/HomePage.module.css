@@ -1,0 +1,18 @@
+.intro {
+    border: 1px solid white;
+    padding: 10px 10px;
+    display: flex;
+}
+
+.name {
+    font-size: 60px;
+    border: 1px solid white;
+}
+
+.images {
+    width: 50%;
+    height: auto;
+    border: 1px solid white;
+    backdrop-filter: blur(10px);
+
+}

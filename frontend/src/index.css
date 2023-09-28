@@ -5,6 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-image: url('../assets/homeback1.png');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    /* background-size: 100vw 100vh; */
+    font-family: 'JetBrains Mono', monospace;
+    
+    margin: 0px 0px;
+   color: white;
 }
 
 code {
