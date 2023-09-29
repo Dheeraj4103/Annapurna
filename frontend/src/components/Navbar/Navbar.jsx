@@ -1,5 +1,7 @@
 import React from "react";
 import style from "./Navbar.module.css";
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Navbar() {
     return (
@@ -19,7 +21,20 @@ function Navbar() {
                 </li>
             </ul>
             <div className={style.search}>
-                <input type="text" placeholder="Search Food"/> 
+                <input type="text" placeholder="Search Food" /> 
+
+                <LocalMallIcon
+                    variant="contained"
+                    fontSize="large"
+                    className={style.cart}
+                >
+                </LocalMallIcon>
+                <AccountCircleIcon
+                    variant="contained"
+                    fontSize="large"
+                    className={style.cart}
+                >
+                </AccountCircleIcon>
             </div>
         </div>
     )

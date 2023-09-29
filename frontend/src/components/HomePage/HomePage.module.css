@@ -1,18 +1,30 @@
 .intro {
-    border: 1px solid white;
+    /* border: 1px solid white; */
     padding: 10px 10px;
     display: flex;
 }
 
 .name {
     font-size: 60px;
-    border: 1px solid white;
+    /* border: 1px solid white; */
+    padding-left: 10%;
 }
 
 .images {
     width: 50%;
     height: auto;
-    border: 1px solid white;
-    backdrop-filter: blur(10px);
+    /* border: 1px solid white; */
+    /* backdrop-filter: blur(10px); */
 
+}
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+  margin: 0px 20%;
+  border-radius: 30px;
 }
