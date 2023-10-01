@@ -81,6 +81,11 @@
     border-radius: 10px;
 }
 
+.link {
+    color: white;
+    text-decoration: none;
+}
+
 
 .navbar ul li:hover {
     cursor: pointer;

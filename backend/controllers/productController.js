@@ -22,8 +22,10 @@ exports.addProduct = BigPromise(async (req, res, next) => {
   }
 
   if (req.files) {
+    console.log(req.files.photos.length);
     for (let index = 0; index < req.files.photos.length; index++) {
       const image = req.files.photos[index];
+      console.log(image);
       const resp = await cloudinary.v2.uploader.upload(image.tempFilePath, {
         folder: "products",
       });
@@ -32,6 +34,7 @@ exports.addProduct = BigPromise(async (req, res, next) => {
         id: resp.public_id,
         secure_url: resp.secure_url,
       });
+      console.log(imageArray);
     }
   }
 

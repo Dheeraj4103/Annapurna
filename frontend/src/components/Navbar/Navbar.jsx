@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Navbar.module.css";
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     return (
@@ -10,14 +11,14 @@ function Navbar() {
                 <img src="https://res.cloudinary.com/dxn2tkapb/image/upload/v1695917484/Annapurna/assets/atvvqhjvrqhs1sms8phz.png"></img>
             </div>
             <ul>
-                <li className={style.tabs}>
-                    Home
+                <li>
+                    <Link to="/" className={style.link}>Home</Link>
                 </li>
                 <li>
-                    Menu
+                    <Link to="/menu" className={style.link}>Menu</Link>
                 </li>
                 <li>
-                    About
+                    <Link to="/about" className={style.link}>About</Link>
                 </li>
             </ul>
             <div className={style.search}>
