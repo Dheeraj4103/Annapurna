@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-image: url('../assets/homeback1.png');
+  /* background-image: url('../assets/homeback1.png'); */
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;

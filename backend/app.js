@@ -3,12 +3,23 @@ var morgan = require('morgan');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
-
+const cors = require('cors');
+const helmet = require('helmet');
+const bodyParser = require('body-parser');
 const app = express();
 
 // regular middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(helmet());
+
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+  
+app.use(cors());
 
 // morgan middleware
 app.use(morgan("tiny"));

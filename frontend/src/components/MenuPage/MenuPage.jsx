@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
+import styles from "./MenuPage.module.css";
+import ProductList from "../ProductList/ProductList";
 
 function MenuPage() {
     return (
         <>
             <Navbar></Navbar>
-            <h1>This is Menu</h1>
+            <ProductList></ProductList>
         </>
     )
 };
