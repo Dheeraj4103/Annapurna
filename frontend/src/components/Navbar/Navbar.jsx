@@ -1,14 +1,24 @@
 import React from "react";
+import { useDispatch, useSelector} from "react-redux"
 import style from "./Navbar.module.css";
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from 'react-router-dom';
+import { logout } from "../../store/User";
 
 function Navbar() {
+    const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
+    const userName = useSelector(state => state.userReducer.name);
+    const dispatch = useDispatch();
+
+    function handleLogout() {
+        dispatch(logout());
+    }
+
     return (
         <div className={style.navbar}>
-            <div className={ style.logo }>
-                <img src="https://res.cloudinary.com/dxn2tkapb/image/upload/v1695917484/Annapurna/assets/atvvqhjvrqhs1sms8phz.png"></img>
+            <div className={style.logo}>
+                <img alt="" src="https://res.cloudinary.com/dxn2tkapb/image/upload/v1695917484/Annapurna/assets/atvvqhjvrqhs1sms8phz.png"></img>
             </div>
             <ul>
                 <li>
@@ -22,7 +32,7 @@ function Navbar() {
                 </li>
             </ul>
             <div className={style.search}>
-                <input type="text" placeholder="Search Food" /> 
+                <input type="text" placeholder="Search Food" />
 
                 <LocalMallIcon
                     variant="contained"
@@ -30,15 +40,23 @@ function Navbar() {
                     className={style.cart}
                 >
                 </LocalMallIcon>
-                <AccountCircleIcon
-                    variant="contained"
-                    fontSize="large"
-                    className={style.cart}
-                >
-                </AccountCircleIcon>
+                {/* Login button */}
+                <div className={style.userName}>
+                    <AccountCircleIcon
+                        variant="contained"
+                        fontSize="large"
+                        className={style.cart}
+                        
+                    >{<p>Hello</p>}
+                    </AccountCircleIcon>
+                    {/* {isLoggedIn ? <>{userName}</> : <></>} */}
+                    {isLoggedIn ?
+                        <button onClick={handleLogout}>Logout</button> :
+                        <Link to="/login" className={style.link_1}>Login</Link>}
+                </div>
             </div>
         </div>
-    )
+    );
 };
 
 export default Navbar;

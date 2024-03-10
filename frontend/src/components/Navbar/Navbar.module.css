@@ -55,6 +55,7 @@
 .navbar ul {
     display: flex;
     /* flex-direction: column; */
+    margin-left: 15em;
 }
 
 .cart {
@@ -93,4 +94,15 @@
     border: none;
     box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
     text-decoration: underline;
+}
+
+.userName {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.link_1 {
+    color: white;
 }

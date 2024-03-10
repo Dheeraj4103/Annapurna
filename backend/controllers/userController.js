@@ -28,10 +28,10 @@ exports.signup = BigPromise(async (req, res, next) => {
         name,
         email,
         password,
-        photo: {
-            id: result.public_id,
-            secure_url: result.secure_url
-        }
+        // photo: {
+        //     id: result.public_id || null,
+        //     secure_url: result.secure_url || null
+        // }
     });
 
     cookieToken(user, res);

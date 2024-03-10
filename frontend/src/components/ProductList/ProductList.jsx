@@ -1,43 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, memo } from "react";
+import {useDispatch, useSelector} from "react-redux"
 import ProductCard from "../ProductCard/ProductCard";
 import styles from "./ProductList.module.css";
+import { loadingProducts } from "../../store/Products";
 
 function ProductList() {
-    // const response = await fetch("/api/v1/products");
-    
-    // if (response.ok) {
-    //     const data = await response.json();
-    //     console.log(data);
-    // }
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:4000/api/v1/products')
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setProducts(data.products);
-            })
-            .catch(error => console.error('Error:', error));
-    }, []);
-    useEffect(() => {
-        console.log("products array is changed", products);
-    }, [products]);
-    
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.productList);
 
-    return (
-        <div className={styles.list}>
-            {
-                (products.length > 0 ? (
-                    products.map((product) => {
-                        return (
-                            <ProductCard product={product}/>
-                        )
-                    })
-                ) : <></>
-                )
-            }
-        </div>
-    );
+    useEffect(() => {
+        dispatch(loadingProducts());
+    }, [dispatch]);
+
+    if (products.isLoading) {
+        return <h1>Loading....</h1>
+    } else if (products.products.length > 0) {
+
+        return (
+            <div className={styles.list}>
+                {
+                        products.products.map((product) => {
+                            return (
+                                <ProductCard product={product} />
+                            )
+                        })
+                    
+                    
+                }
+            </div>
+        );
+    } else {
+        return <h1>No products found....</h1>
+    }
 };
 
 export default ProductList;
