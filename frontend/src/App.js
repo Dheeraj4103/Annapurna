@@ -5,6 +5,7 @@ import About from './components/About/About';
 import MenuPage from './components/MenuPage/MenuPage';
 import Login from './components/Login/login';
 import SignUp from './components/Login/signup';
+import Cart from './components/Cart/Cart';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
       <Route exact={true} path='/about' Component={About} />
       <Route exact={true} path='/login' Component={Login} />
       <Route exact={true} path='/signup' Component={SignUp} />
+      <Route exact={true} path='/cart' Component={Cart} />
    </Routes>
   );
 }

@@ -21,6 +21,8 @@ function SignUp() {
         setName(null)
         setPassword(null)
     }
+
+    
     return (
         <>
             <Navbar></Navbar>

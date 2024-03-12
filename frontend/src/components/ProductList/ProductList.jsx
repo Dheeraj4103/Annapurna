@@ -19,9 +19,11 @@ function ProductList() {
         return (
             <div className={styles.list}>
                 {
-                        products.products.map((product) => {
+                    products.products.map((product, index) => {
+                        console.log(product)
+                        product["id"] = index;
                             return (
-                                <ProductCard product={product} />
+                                <ProductCard product={product} key={index}/>
                             )
                         })
                     

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ProductCard.module.css";
+import ReduxAddToCart from "../ReduxAddToCart/ReduxAddToCart";
 
 
 
@@ -12,8 +13,9 @@ function ProductCard({product}) {
                 <p>Price:- { product.price }</p>
             </div>
             <div className={styles.btns}>
-                <button className={styles.btn}>More</button>
-                <button className={styles.btn}>Order</button>
+                {/* <button className={styles.btn}>More</button>
+                <button className={styles.btn}>Order</button> */}
+                <ReduxAddToCart product={product} className={styles.btn}></ReduxAddToCart>
             </div>
         </div>
     )

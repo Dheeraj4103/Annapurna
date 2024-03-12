@@ -30,6 +30,9 @@ export function loadingProducts() {
             const response = await fetch(process.env.REACT_APP_SERVER_URL + "/products");
             if (response.ok) {
                 const data = await response.json();
+                data.products.forEach((product, index) => {
+                    product["id"] = index
+                });
                 console.log(data);
                 dispatch(productsLoaded(data.products));
             } else {

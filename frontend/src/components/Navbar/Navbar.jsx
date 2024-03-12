@@ -33,13 +33,14 @@ function Navbar() {
             </ul>
             <div className={style.search}>
                 <input type="text" placeholder="Search Food" />
-
-                <LocalMallIcon
-                    variant="contained"
-                    fontSize="large"
-                    className={style.cart}
-                >
-                </LocalMallIcon>
+                <Link to="/cart" className={style.link_1}>
+                    <LocalMallIcon
+                        variant="contained"
+                        fontSize="large"
+                        className={style.cart}
+                    >
+                    </LocalMallIcon>
+                </Link>
                 {/* Login button */}
                 <div className={style.userName}>
                     <AccountCircleIcon
