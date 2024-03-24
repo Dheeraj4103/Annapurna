@@ -22,6 +22,7 @@ function App() {
   return (
     <Routes>
       <Route exact={true} path='/' Component={HomePage} />
+      {/* <Route exact={true} path='/home' Component={HomePage} /> */}
       <Route exact={true} path='/menu' Component={MenuPage} />
       <Route exact={true} path='/about' Component={About} />
       <Route exact={true} path='/login' Component={Login} />

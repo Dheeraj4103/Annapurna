@@ -1,6 +1,9 @@
 import React, {memo} from "react";
 import {useDispatch, useSelector} from "react-redux"
 import { addtocart, removefromcart } from "../../store/cart";
+import style from "./ReduxAddToCart.module.css"
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function ReduxAddToCart({product, className}) {
     const dispatch = useDispatch();
@@ -20,10 +23,20 @@ function ReduxAddToCart({product, className}) {
         )
     } else {
         return (
-            <div>
-                <button onClick={decrement}>-</button>
-                <span>{quantity}</span>
-                <button onClick={increment}>+</button>
+            <div className={ style.addRemoveCart }>
+                {/* <button onClick={decrement} className={style.btn}>-</button> */}
+                <RemoveCircleIcon
+                    onClick={decrement}
+                    className={style.btn}
+                    fontSize="large"
+                ></RemoveCircleIcon>
+                <p>{quantity}</p>
+                {/* <button onClick={increment}>+</button> */}
+                <AddCircleIcon
+                    onClick={increment}
+                    className={style.btn}
+                    fontSize="large"
+                ></AddCircleIcon>
             </div>
         );
     }

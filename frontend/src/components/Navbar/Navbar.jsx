@@ -6,6 +6,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from 'react-router-dom';
 import { logout } from "../../store/User";
 
+
 function Navbar() {
     const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
     const userName = useSelector(state => state.userReducer.name);
@@ -48,11 +49,11 @@ function Navbar() {
                         fontSize="large"
                         className={style.cart}
                         
-                    >{<p>Hello</p>}
+                    >
                     </AccountCircleIcon>
                     {/* {isLoggedIn ? <>{userName}</> : <></>} */}
                     {isLoggedIn ?
-                        <button onClick={handleLogout}>Logout</button> :
+                        <button onClick={handleLogout} className={style.logout}>Logout</button> :
                         <Link to="/login" className={style.link_1}>Login</Link>}
                 </div>
             </div>

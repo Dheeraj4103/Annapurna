@@ -3,12 +3,13 @@ import Navbar from "../Navbar/Navbar";
 import {useDispatch, useSelector} from "react-redux"
 import { logIn } from "../../store/User";
 import style from "./login.module.css"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
     const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
     const dispatch = useDispatch();
     console.log(isLoggedIn);
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
@@ -18,6 +19,7 @@ function Login() {
         dispatch(logIn(userCreds));
         setEmail(null)
         setPassword(null)
+        navigate("/");
     }
     return (
         <>

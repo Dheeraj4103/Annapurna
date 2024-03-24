@@ -1,0 +1,14 @@
+.btn {
+    margin: 5px 5px;
+}
+
+.addRemoveCart {
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+}
+
+.addRemoveCart p {
+    margin: 7px;
+    font-size: x-large;
+}
