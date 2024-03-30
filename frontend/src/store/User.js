@@ -14,8 +14,8 @@ export function addUserDetail(userDetails) {
 
 export function logout() {
   return {
-    type: "Log-Out"
-  }
+    type: "Log-Out",
+  };
 }
 
 export function logInError(error) {
@@ -31,32 +31,38 @@ export function logIn(creds) {
       console.log(creds);
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      const response = await fetch(process.env.REACT_APP_SERVER_URL + "/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: creds.email,
-          password: creds.password,
-        }),
-        headers: myHeaders,
-      });
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + "/login",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: creds.email,
+            password: creds.password,
+          }),
+          headers: myHeaders,
+        }
+      );
 
       if (response.ok) {
         dispatch(logInStatus(true));
         const result = await response.json();
+        console.log(result.user._id);
         const userDetails = {
           name: result.user.name,
           email: result.user.email,
+          userId: result.user._id,
+          token: result.token
         };
         dispatch(addUserDetail(userDetails));
         console.log(getState());
       } else {
-          dispatch(logInError("Enter Valid Credentials"));
+        dispatch(logInError("Enter Valid Credentials"));
       }
     } catch (error) {
-        dispatch(logInError(error))
+      dispatch(logInError(error));
     }
   };
-};
+}
 
 export function signUp(creds) {
   return async (dispatch, getState) => {
@@ -64,37 +70,45 @@ export function signUp(creds) {
       console.log(creds);
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      const response = await fetch(process.env.REACT_APP_SERVER_URL + "/signup", {
-        method: "POST",
-        body: JSON.stringify({
-          name: creds.name,
-          email: creds.email,
-          password: creds.password,
-        }),
-        headers: myHeaders,
-      });
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + "/signup",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            name: creds.name,
+            email: creds.email,
+            password: creds.password,
+          }),
+          headers: myHeaders,
+        }
+      );
 
       if (response.ok) {
         dispatch(logInStatus(true));
         const result = await response.json();
+        console.log(result);
         const userDetails = {
           name: result.user.name,
           email: result.user.email,
+          userId: result.user._id,
+          token: result.token
         };
         dispatch(addUserDetail(userDetails));
         console.log(getState());
       }
     } catch (error) {
-      dispatch(logInError(error))
+      dispatch(logInError(error));
     }
-  }
+  };
 }
 
 function userReducer(
   state = {
     isLoggedIn: false,
+    userId: null,
     name: null,
     email: null,
+    token: null,
     error: null,
   },
   action
@@ -105,16 +119,18 @@ function userReducer(
     case "Add_User_Details":
       return {
         ...state,
+        userId: action.payload.userId,
         name: action.payload.name,
         email: action.payload.email,
+        token: action.payload.token
       };
     case "Log-Out":
       return {
         ...state,
         isLoggedIn: false,
         name: null,
-        email: null
-      }
+        email: null,
+      };
     case "Log_In_Error":
       return { ...state, error: action.payload };
     default:

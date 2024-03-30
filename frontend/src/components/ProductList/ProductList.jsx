@@ -7,6 +7,7 @@ import { loadingProducts } from "../../store/Products";
 function ProductList() {
     const dispatch = useDispatch();
     const products = useSelector(state => state.productList);
+    console.log(products)
 
     useEffect(() => {
         dispatch(loadingProducts());

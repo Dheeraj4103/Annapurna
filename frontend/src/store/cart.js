@@ -41,6 +41,66 @@ export function hidecart() {
   };
 }
 
+export function placeOrder(shippingInfo) {
+  return async function (dispatch, getState) {
+    const items = getState().cart.items;
+    const itemsList = Object.values(items);
+    let orderItems = []
+    for (let i = 0; i < itemsList.length; i++) {
+      const item = itemsList[i];
+      const orderItem = {
+        name: item.name,
+        quantity: item.quantity,
+        image: item.photos[0].secure_url,
+        price: item.price,
+        product: item._id
+      }
+      orderItems.push(orderItem);
+    }
+    const subTotal = itemsList.reduce((total, currentItem) => {
+      const newTotal = total + currentItem.quantity * currentItem.price;
+      return newTotal;
+    }, 0);
+    const tax = subTotal * 0.18;
+    const shippingAmount = 10;
+    const total = subTotal + tax + shippingAmount;
+
+    dispatch({ type: Checkout_Init });
+    try {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      const response = await fetch(process.env.REACT_APP_SERVER_URL + "/order/create" , {
+        method: "POST",
+        body: JSON.stringify({
+          shippingInfo: shippingInfo,
+          orderItems: orderItems,
+          shippingAmount: shippingAmount,
+          taxAmount: tax,
+          totalAmount: total,
+          paymentInfo: {
+            id: "testString",
+          },
+          user: getState().userReducer.userId,
+          token: getState().userReducer.token
+        }),
+        headers: myHeaders,
+      });
+
+      console.log("ok in cart.js");
+      if (response.ok) {
+        dispatch({ type: Checkout_Done });
+      } else {
+        dispatch({
+          type: Checkout_Error,
+          payload: new Error(response.statusText),
+        });
+      }
+    } catch (error) {
+      dispatch({ type: Checkout_Error, payload: error });
+    }
+  };
+}
+
 function cartReducer(
   state = {
     items: JSON.parse(localStorage.getItem("cart") || "{}"),
@@ -60,7 +120,7 @@ function cartReducer(
 
     case "Add_To_Cart": {
       const product = action.payload;
-      console.log("In add to cart", state)
+      console.log("In add to cart", state);
       if (state.items[product.id]) {
         return {
           ...state,
@@ -82,7 +142,6 @@ function cartReducer(
               quantity: 1,
             },
           },
-          
         };
       }
     }

@@ -11,6 +11,7 @@ exports.createOrder = BigPromise(async (req, res, next) => {
     taxAmount,
     shippingAmount,
     totalAmount,
+    user
   } = req.body;
 
   const order = await Order.create({
@@ -20,7 +21,7 @@ exports.createOrder = BigPromise(async (req, res, next) => {
     taxAmount,
     shippingAmount,
     totalAmount,
-    user: req.user._id,
+    user: user || req.user._id,
   });
 
   res.status(200).json({
@@ -46,7 +47,8 @@ exports.getOneOrder = BigPromise(async (req, res, next) => {
 });
 
 exports.getLoggedInOrders = BigPromise(async (req, res, next) => {
-  const orders = await Order.find({ user: req.user._id });
+  const userId = req.query.userId
+  const orders = await Order.find({ user: userId });
 
   if (!orders) {
     return next(new CustomError("Check if User Logged In or Not", 401));
