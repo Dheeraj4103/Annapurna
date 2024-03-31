@@ -1,10 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "A backend api for Vastraz",
-  "main": "index.js",
+  "description": "A backend api for Annapurna",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "dev": "nodemon index.js"
   },
   "author": "Dheeraj Jadhav",

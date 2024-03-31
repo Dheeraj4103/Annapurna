@@ -1,54 +1,22 @@
-const express = require('express');
-var morgan = require('morgan');
+const app = require('./nodeApp');
 require('dotenv').config();
-const cookieParser = require('cookie-parser');
-const fileUpload = require('express-fileupload');
-const cors = require('cors');
-const helmet = require('helmet');
-const bodyParser = require('body-parser');
-const app = express();
+const connectWithDB = require("./config/db");
+const cloudinary = require('cloudinary');
+// connect oto database
+connectWithDB();
 
-// regular middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// configure cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
-app.use(helmet());
+const corsOptions = {
+    origin: 'http://localhost:3000/#/menu',
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-  
-app.use(cors());
 
-// morgan middleware
-app.use(morgan("tiny"));
-
-// cookie and fileuploader middleware
-app.use(cookieParser());
-app.use(fileUpload({
-    useTempFiles: true,
-    tempFileDir: "/tmp/"
-}));
-
-app.set("view engine", "ejs");
-
-// import all routes
-const home = require('./routes/home');
-const user = require('./routes/user');
-const product = require('./routes/product');
-const payment = require('./routes/payment');
-const order = require('./routes/order');
-
-// router middleware
-app.use('/api/v1', home);
-app.use('/api/v1', user);
-app.use('/api/v1', product);
-app.use('/api/v1', payment);
-app.use('/api/v1', order);
-
-app.get('/signuptest', (req, res) => {
-    res.render("signuptest")
-})
-
-module.exports = app;
+app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));
