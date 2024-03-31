@@ -1,3 +1,5 @@
+import { getMyOrders } from "./User";
+
 const { omit } = require("lodash");
 
 const addToCart = "Add_To_Cart";
@@ -89,6 +91,7 @@ export function placeOrder(shippingInfo) {
       console.log("ok in cart.js");
       if (response.ok) {
         dispatch({ type: Checkout_Done });
+        dispatch(getMyOrders());
       } else {
         dispatch({
           type: Checkout_Error,

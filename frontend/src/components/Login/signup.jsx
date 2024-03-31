@@ -17,9 +17,9 @@ function SignUp() {
     function handleSubmit() {
         const userCreds = { name, email, password };
         dispatch(signUp(userCreds));
-        setEmail(null)
-        setName(null)
-        setPassword(null)
+        // setEmail(null)
+        // setName(null)
+        // setPassword(null)
     }
 
     

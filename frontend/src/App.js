@@ -7,6 +7,7 @@ import Login from './components/Login/login';
 import SignUp from './components/Login/signup';
 import Cart from './components/Cart/Cart';
 import ShippingInfo from './components/Cart/ShippingInfo';
+import Profile from './components/Profile/Profile';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
       <Route exact={true} path='/signup' Component={SignUp} />
       <Route exact={true} path='/cart' Component={Cart} />
       <Route exact={true} path='/shippingInfo' Component={ShippingInfo} />
+      <Route exact={true} path='/profile' Component={Profile} />
    </Routes>
   );
 }

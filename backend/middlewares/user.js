@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 exports.isLoggedIn = BigPromise(async (req, res, next) => {
     // get the token
-    const token = req.cookies.token || req.body.token;
+    const token = (req.header('Authorization') ? req.header('Authorization').replace("Bearer ", "") : false) || req.cookies.token || req.body.token;
 
     // check if user is logged in
     if (!token) {

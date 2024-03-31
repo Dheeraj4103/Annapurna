@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import {useDispatch, useSelector} from "react-redux"
-import { logIn } from "../../store/User";
 import style from "./ShippingInfo.module.css"
-import { Link, useNavigate } from 'react-router-dom';
-import { placeOrder } from "../../store/cart";
+import { useNavigate } from 'react-router-dom';
+import { checkoutSuccess, placeOrder } from "../../store/cart";
 
 function ShippingInfo() {
     const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
+    const isSubmitting = useSelector(state => state.cart.isSubmitting);
+    const isSubmitSuccess = useSelector(state => state.cart.isSubmitSuccess);
    
     const dispatch = useDispatch();
     console.log(isLoggedIn);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log("Submitting:- ", isSubmitting);
+        console.log("Submitted:- ", isSubmitSuccess);
+        if (isSubmitSuccess) {
+            dispatch(checkoutSuccess());
+            console.log("Order Placed Successfully !!!!!!");
+        }
+    }, [isSubmitting, isSubmitSuccess, dispatch]);
 
     const [address, setAddress] = useState(null);
     const [city, setCity] = useState(null);
@@ -30,7 +40,15 @@ function ShippingInfo() {
             country
         }
         console.log(shippingInfo)
-        dispatch(placeOrder(shippingInfo));
+
+        if (isLoggedIn) {
+            dispatch(placeOrder(shippingInfo));
+            dispatch(checkoutSuccess())
+            navigate("/profile");
+        } else {
+            navigate("/login");
+        }
+
     }
     return (
         <>
@@ -96,6 +114,7 @@ function ShippingInfo() {
                 >
                     Submit
                 </button>
+                { isSubmitting && <div>Placing Order......</div> }
                 
             </div>
         </>

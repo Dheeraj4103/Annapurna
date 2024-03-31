@@ -1,3 +1,5 @@
+
+
 export function logInStatus(status) {
   return {
     type: "Log_In",
@@ -22,6 +24,13 @@ export function logInError(error) {
   return {
     type: "Log_In_Error",
     payload: error,
+  };
+}
+
+export function setMyOrders(myOrders) {
+  return {
+    type: "Get_My_Orders",
+    payload: myOrders,
   };
 }
 
@@ -51,9 +60,10 @@ export function logIn(creds) {
           name: result.user.name,
           email: result.user.email,
           userId: result.user._id,
-          token: result.token
+          token: result.token,
         };
         dispatch(addUserDetail(userDetails));
+        dispatch(getMyOrders());
         console.log(getState());
       } else {
         dispatch(logInError("Enter Valid Credentials"));
@@ -91,13 +101,39 @@ export function signUp(creds) {
           name: result.user.name,
           email: result.user.email,
           userId: result.user._id,
-          token: result.token
+          token: result.token,
         };
         dispatch(addUserDetail(userDetails));
         console.log(getState());
       }
     } catch (error) {
       dispatch(logInError(error));
+    }
+  };
+}
+
+export function getMyOrders() {
+  return async (dispatch, getState) => {
+    try {
+      const user = getState().userReducer;
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer " + user.token)
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + "/myOrders?userId=" + user.userId,
+        {
+          method: "GET",
+          headers: myHeaders
+        }
+      );
+      if (response.ok) {
+        const result = await response.json();
+        const myOrders = result.orders;
+        dispatch(setMyOrders(myOrders));
+      } else {
+        dispatch(logInError("Something wrong with orders"));
+      }
+    } catch (e) {
+      dispatch(logInError(e));
     }
   };
 }
@@ -109,6 +145,7 @@ function userReducer(
     name: null,
     email: null,
     token: null,
+    myOrders: [],
     error: null,
   },
   action
@@ -122,7 +159,12 @@ function userReducer(
         userId: action.payload.userId,
         name: action.payload.name,
         email: action.payload.email,
-        token: action.payload.token
+        token: action.payload.token,
+      };
+    case "Get_My_Orders":
+      return {
+        ...state,
+        myOrders: action.payload,
       };
     case "Log-Out":
       return {
