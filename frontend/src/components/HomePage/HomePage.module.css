@@ -39,7 +39,7 @@
   }
   @media only screen and (max-width: 522px) {
     .name h1 {
-        font-size: 3em;
+        font-size: 1em;
     }
 }
 @media only screen and (max-width: 376px) {
