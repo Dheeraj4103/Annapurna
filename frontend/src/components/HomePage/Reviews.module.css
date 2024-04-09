@@ -1,6 +1,6 @@
 .card {
     border: 2px solid white;
-    /* width: max-content; */
+    width: auto;
     padding: 10px 10px;
     /* text-align: center; */
     align-items: center;
@@ -14,8 +14,10 @@
 .carouselContainer {
     /* border: 2px solid white; */
     padding: 20px 10px;
-    width: min-content;
+    width: 90%;
     /* color: black; */
 
 }
+
+
 

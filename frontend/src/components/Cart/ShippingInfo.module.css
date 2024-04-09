@@ -4,7 +4,7 @@
     /* border: 2px solid white; */
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: fit-content;
     margin-left: 33%;
     /* justify-content: center; */
     /* text-align: center; */
@@ -42,7 +42,7 @@
     color: white;
     font-size: 1.6em;
     margin: 5px 5px;
-    width: 30%;
+    /* width: 30%; */
 }
 
 .btn:hover {
@@ -53,4 +53,23 @@
 
 .link_1 {
     color: white;
+}
+
+@media (max-width: 768px) {
+
+    .loginForm {
+        margin:0 15%;
+    }
+}
+@media (max-width: 522px) {
+
+    .loginForm {
+        margin:0 10%;
+    }
+}
+@media (max-width: 376px) {
+
+    .loginForm {
+        margin:0 2.5%;
+    }
 }

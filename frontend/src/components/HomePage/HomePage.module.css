@@ -5,9 +5,10 @@
 }
 
 .name {
-    font-size: 60px;
+    font-size: 3.7em;
     /* border: 1px solid white; */
     padding-left: 10%;
+    
 }
 
 .images {
@@ -27,4 +28,22 @@
   box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
   margin: 0px 20%;
   border-radius: 30px;
+  width: inherit;
 }
+
+@media only screen and (max-width: 1206px) {
+    .reviews {
+        width: 90%;
+        margin: 0 5%;
+    }
+  }
+  @media only screen and (max-width: 522px) {
+    .name h1 {
+        font-size: 3em;
+    }
+}
+@media only screen and (max-width: 376px) {
+    .name h1 {
+        font-size: 0.5em;
+    }
+  }
